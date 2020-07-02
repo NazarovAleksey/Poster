@@ -8,6 +8,11 @@ import ru.netology.domain.Movie;
 public class MovieManager {
     private Movie[] movies = new Movie[0];
     private int outputSize = 10;
+    private int customOutputSize;
+
+    public MovieManager(int customOutputSize) {
+        this.customOutputSize = customOutputSize;
+        }
 
     public void addMovie(Movie movie) {
         int length = movies.length + 1;
@@ -21,13 +26,27 @@ public class MovieManager {
     }
 
     public Movie[] getAll() {
-        if (movies.length < outputSize) {
-                outputSize = movies.length;
+        Movie[] resultMovie = new Movie[0];
+        if (customOutputSize == 0 & movies.length <= outputSize) {
+            resultMovie = new Movie[movies.length];
+            for (int i = 0; i < resultMovie.length; i++) {
+                int index = movies.length - i - 1;
+                resultMovie[i] = movies[index];
             }
-        Movie[] resultMovie = new Movie[outputSize];
-        for (int i = 0; i < resultMovie.length; i++) {
-            int result = movies.length - i - 1;
-            resultMovie[i] = movies[result];
+        }
+        if (customOutputSize == 0 & movies.length >= outputSize++) {
+            resultMovie = new Movie[10];
+            for (int i = 0; i < resultMovie.length; i++) {
+                int index = movies.length - i - 1;
+                resultMovie[i] = movies[index];
+            }
+        }
+        if (customOutputSize != 0) {
+            resultMovie = new Movie[customOutputSize];
+            for (int i = 0; i < resultMovie.length; i++) {
+                int index = movies.length - i - 1;
+                resultMovie[i] = movies[index];
+            }
         }
         return resultMovie;
     }

@@ -82,4 +82,24 @@ class MovieManagerTest {
 
         assertArrayEquals(expected, movieManager.getAll());
     }
+
+    @Test
+    public void customOutputSize() {
+        MovieManager movieManager = new MovieManager(5);
+        movieManager.addMovie(first);
+        movieManager.addMovie(second);
+        movieManager.addMovie(third);
+        movieManager.addMovie(fourth);
+        movieManager.addMovie(fifth);
+        movieManager.addMovie(sixth);
+        movieManager.addMovie(seventh);
+        movieManager.addMovie(eighth);
+        movieManager.addMovie(ninth);
+        movieManager.addMovie(tenth);
+        movieManager.addMovie(eleventh);
+
+        Movie[] expected = new Movie[]{eleventh, tenth, ninth, eighth, seventh};
+
+        assertArrayEquals(expected, movieManager.getAll());
+    }
 }
