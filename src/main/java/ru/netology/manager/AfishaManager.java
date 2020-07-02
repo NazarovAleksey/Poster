@@ -13,6 +13,15 @@ import ru.netology.repository.AfishaRepository;
 public class AfishaManager {
     private AfishaRepository repository;
     private int outputSize = 10;
+    private int customOutputSize;
+
+    public AfishaManager(AfishaRepository repository, int customOutputSize) {
+        this.customOutputSize = customOutputSize;
+    }
+
+    public AfishaManager(AfishaRepository repository) {
+        this.repository = repository;
+    }
 
     public void addMovie(Movie movie) {
         repository.save(movie);

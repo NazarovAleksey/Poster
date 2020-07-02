@@ -17,7 +17,7 @@ class AfishaManagerTest {
     @Mock
     AfishaRepository repository;
     @InjectMocks
-    AfishaManager afishaManager;
+    AfishaManager afishaManager = new AfishaManager(repository);
 
     private Movie first = new Movie(1, "Бладшот", "Боевик", "ссылка на картинку");
     private Movie second = new Movie(2, "Вперёд", "Мультфильм", "ссылка на картинку");
@@ -73,6 +73,16 @@ class AfishaManagerTest {
 
         Movie[] expected = new Movie[]{eleventh, tenth, ninth, eighth, seventh, sixth, fifth, fourth, third, second};
 
+        assertArrayEquals(expected, afishaManager.getAll());
+        verify(repository).findAll();
+    }
+
+    @Test
+    public void customOutputSize() {
+        AfishaManager manager = new AfishaManager(repository, 5);
+        Movie[] returned = new Movie[]{first, second, third, fourth, fifth};
+        doReturn(returned).when(repository).findAll();
+        Movie[] expected = new Movie[]{fifth, fourth, third, second, first};
         assertArrayEquals(expected, afishaManager.getAll());
         verify(repository).findAll();
     }

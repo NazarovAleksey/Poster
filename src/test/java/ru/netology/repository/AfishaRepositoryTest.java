@@ -55,14 +55,13 @@ class AfishaRepositoryTest {
 
     @Test
     void shouldFindById() {
-        Movie[] expected = new Movie[]{third};
-        assertArrayEquals(expected, repository.findById(3));
+        Movie expected = new Movie(3, "Отель Белград", "Комедия", "ссылка на картинку");
+        assertEquals(expected, repository.findById(3));
     }
 
     @Test
     void shouldFindInvalidId() {
-        Movie[] expected = new Movie[0];
-        assertArrayEquals(expected, repository.findById(12));
+        assertNull(repository.findById(12));
     }
 
     @Test
