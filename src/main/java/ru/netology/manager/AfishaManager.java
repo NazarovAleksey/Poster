@@ -1,7 +1,5 @@
 package ru.netology.manager;
 
-
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.netology.domain.Movie;
@@ -9,13 +7,13 @@ import ru.netology.repository.AfishaRepository;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class AfishaManager {
     private AfishaRepository repository;
     private int outputSize = 10;
     private int customOutputSize;
 
     public AfishaManager(AfishaRepository repository, int customOutputSize) {
+        this.repository = repository;
         this.customOutputSize = customOutputSize;
     }
 
@@ -29,15 +27,21 @@ public class AfishaManager {
 
     public Movie[] getAll() {
         Movie[] movies = repository.findAll();
-        int length = movies.length;
-        if (outputSize < length) {
-            length = outputSize;
+        Movie[] result = new Movie[movies.length];
+
+        if (customOutputSize == 0 & movies.length <= outputSize) {
+            result = new Movie[movies.length];
         }
-        Movie[] resultMovie = new Movie[length];
-        for (int i = 0; i < resultMovie.length; i++) {
+        if (customOutputSize == 0 & movies.length > outputSize) {
+            result = new Movie[10];
+        }
+        if (customOutputSize != 0) {
+            result = new Movie[customOutputSize];
+        }
+        for (int i = 0; i < result.length; i++) {
             int index = movies.length - i - 1;
-            resultMovie[i] = movies[index];
+            result[i] = movies[index];
         }
-        return resultMovie;
+        return result;
     }
 }

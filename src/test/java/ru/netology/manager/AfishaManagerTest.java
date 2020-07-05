@@ -79,10 +79,12 @@ class AfishaManagerTest {
 
     @Test
     public void customOutputSize() {
-        AfishaManager manager = new AfishaManager(repository, 5);
+        AfishaManager afishaManager = new AfishaManager(repository, 5);
         Movie[] returned = new Movie[]{first, second, third, fourth, fifth};
         doReturn(returned).when(repository).findAll();
+
         Movie[] expected = new Movie[]{fifth, fourth, third, second, first};
+
         assertArrayEquals(expected, afishaManager.getAll());
         verify(repository).findAll();
     }
