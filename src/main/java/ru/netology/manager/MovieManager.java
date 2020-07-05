@@ -29,24 +29,16 @@ public class MovieManager {
         Movie[] resultMovie = new Movie[0];
         if (customOutputSize == 0 & movies.length <= outputSize) {
             resultMovie = new Movie[movies.length];
-            for (int i = 0; i < resultMovie.length; i++) {
-                int index = movies.length - i - 1;
-                resultMovie[i] = movies[index];
-            }
         }
-        if (customOutputSize == 0 & movies.length >= outputSize++) {
-            resultMovie = new Movie[10];
-            for (int i = 0; i < resultMovie.length; i++) {
-                int index = movies.length - i - 1;
-                resultMovie[i] = movies[index];
-            }
+        if (customOutputSize == 0 & movies.length > outputSize) {
+            resultMovie = new Movie[outputSize];
         }
         if (customOutputSize != 0) {
             resultMovie = new Movie[customOutputSize];
-            for (int i = 0; i < resultMovie.length; i++) {
-                int index = movies.length - i - 1;
-                resultMovie[i] = movies[index];
-            }
+        }
+        for (int i = 0; i < resultMovie.length; i++) {
+            int index = movies.length - i - 1;
+            resultMovie[i] = movies[index];
         }
         return resultMovie;
     }
